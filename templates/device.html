@@ -1,0 +1,179 @@
+{% extends 'base.html' %} {% block konten %}
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <p class="text-uppercase text-sm">Device Information</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label"
+                  >Microcontroller
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  value="ESP32-DevKit-V1, ESP32-CAM" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">
+                  Comunication Module</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  value="LoRa SX1278" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label"
+                  >Temperature Sensor</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  value="DHT21" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label"
+                  >Humidity Sensor</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  value="DHT21" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">
+                  PPMCH4 Sensor</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  value="MQ-4 Sensor" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">
+                  PPMCO Sensor</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  value="MQ-7 Sensor" />
+              </div>
+            </div>            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label"
+                  >Baterai</label>
+                <input class="form-control" type="text" value="12V 2000mAH and 7V 3000mAH" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label"
+                  >LCD</label>
+                <input class="form-control" type="text" value="16x2" />
+              </div>
+            </div>
+          </div>
+          <hr class="horizontal dark" />
+          <p class="text-uppercase text-sm">Power Information</p>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label"
+                  >Power</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  value="This system uses 12V and 5V." />
+              </div>
+            </div>
+            <hr class="horizontal dark" />
+            <p class="text-uppercase text-sm">More Information</p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label"
+                    >Local Monitoring</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    value="LCD functions to facilitate direct monitoring of the tool." />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-profile">
+        <img
+          src="{{url_for('static',filename='img/carousel-3.jpg')}}"
+          alt="Image placeholder"
+          class="card-img-top" />
+        <div class="row justify-content-center">
+          <div class="col-4 col-lg-4 order-lg-2">
+            <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
+              <a href="javascript:;">
+                <img
+                  src="{{url_for('static',filename='img/fadli.jpg')}}"
+                  class="rounded-circle img-fluid border border-2 border-white" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
+          <div class="d-flex justify-content-between">
+            <a
+              href="javascript:;"
+              class="btn btn-sm btn-info mb-0 d-none d-lg-block"
+              >Connect</a
+            >
+            <a
+              href="javascript:;"
+              class="btn btn-sm btn-info mb-0 d-block d-lg-none"
+              ><i class="ni ni-collection"></i
+            ></a>
+            <a
+              href="javascript:;"
+              class="btn btn-sm btn-dark float-right mb-0 d-none d-lg-block"
+              >Message</a
+            >
+            <a
+              href="javascript:;"
+              class="btn btn-sm btn-dark float-right mb-0 d-block d-lg-none"
+              ><i class="ni ni-email-83"></i
+            ></a>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="text-center mt-4">
+            <h5>Ahmad Zulfadli</h5>
+            <div class="h6 font-weight-300">
+              <i class="ni location_pin mr-2"></i>Pekanbaru, Indonesia
+            </div>
+            <div class="h6 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i>Electrical
+              Engineering - Students
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>State Islamic University
+              Sultan Syarif Kasim Riau
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

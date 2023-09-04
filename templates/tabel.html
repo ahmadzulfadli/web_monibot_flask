@@ -1,0 +1,96 @@
+{% extends 'base.html' %} {% block konten %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Monibot Data Table</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <style>
+                  tr th {
+                    text-align: center;
+                  }
+                </style>
+                <tr>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                    NO
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                    Temperature
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                    Humidity
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                    PPMCH4
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    PPMCO
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    Date/Time
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <style>
+                  tr td p {
+                    text-align: center;
+                  }
+                </style>
+                {% for data in data %}
+                <tr>
+                  <td></td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{loop.revindex}}
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{data.data_temp}}&deg;C
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{data.data_humd}}%
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{data.data_ppmch4}}ppm
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{data.data_ppmco}}ppm
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{data.timestamp}}
+                    </p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -75,67 +75,66 @@ def device():
 
 # create-------------------------------------------------------
 
+@app.route('/inputData', methods=['GET'])
+def inputData():
+    try:
+        mode = request.args.get('mode')
+        if mode != 'save':
+            return jsonify({"error": "Mode not found."}), 400
 
-# @app.route('/inputData', methods=['GET'])
-# def inputData():
-#     try:
-#         mode = request.args.get('mode')
-#         if mode != 'save':
-#             return jsonify({"error": "Mode not found."}), 400
+        else:
+            temperature = request.args.get('temp', type=float)
+            humidity = request.args.get('humd', type=float)
+            ppmch4 = request.args.get('ppmch4', type=float)
+            ppmco = request.args.get('ppmco', type=float)
 
-#         else:
-#             temperature = request.args.get('temperature', type=float)
-#             moisture = request.args.get('moisture', type=float)
-#             ph_meter = request.args.get('ph_meter', type=float)
-#             count_day = request.args.get('count_day', type=int)
+            if temperature is None or humidity is None or ppmch4 is None or ppmco is None:
+                return jsonify({"error": "Temperature or humidity or ppmch4 or ppmco parameters are required."}), 400
 
-#             if temperature is None or moisture is None or ph_meter is None or count_day is None:
-#                 return jsonify({"error": "Temperature or moisture or ph_meter or count_day parameters are required."}), 400
+            # Lakukan operasi simpan data ke database atau lakukan tindakan sesuai kebutuhan
+            newMonibot = Monibot(
+                data_temp=temperature,
+                data_humd=humidity,
+                data_ppmch4=ppmch4,
+                data_ppmco=ppmco
+            )
 
-#             # Lakukan operasi simpan data ke database atau lakukan tindakan sesuai kebutuhan
-#             newMonibot = Monibot(
-#                 temperature=temperature,
-#                 moisture=moisture,
-#                 ph_meter=ph_meter,
-#                 count_day=count_day,
-#             )
+            # Tambahkan data baru ke session
+            db.session.add(newMonibot)
+            # Commit session untuk menyimpan perubahan data ke database
+            db.session.commit()
 
-#             # Tambahkan data baru ke session
-#             db.session.add(newMonibot)
-#             # Commit session untuk menyimpan perubahan data ke database
-#             db.session.commit()
+            return redirect(url_for('lihatData'))
 
-#             return redirect(url_for('lihatData'))
-
-#     except Exception as e:
-#         return jsonify({"error": "An error occurred while trying to add sensor data."}), 500
+    except Exception as e:
+        return jsonify({"error": "An error occurred while trying to add sensor data."}), 500
 
 
-# @app.route('/lihatData', methods=['GET'])
-# def lihatData():
-#     # tampilkan seluruh database dalam format json
-#     dataMonibot = Monibot.query.order_by(
-#         Monibot.timestamp.desc()).all()
-#     data = []
-#     for item in dataMonibot:
-#         data.append({
-#             'id': item.id,
-#             'temperature': item.temperature,
-#             'moisture': item.moisture,
-#             'ph_meter': item.ph_meter,
-#             'count_day': item.count_day,
-#             'timestamp': item.timestamp.strftime('%H:%M'),
-#         })
+@app.route('/lihatData', methods=['GET'])
+def lihatData():
+    # tampilkan seluruh database dalam format json
+    dataMonibot = Monibot.query.order_by(
+        Monibot.timestamp.desc()).all()
+    data = []
+    for item in dataMonibot:
+        data.append({
+            'id': item.id,
+            'temperature': item.data_temp,
+            'humidity': item.data_humd,
+            'ppmch4': item.data_ppmch4,
+            'ppmco': item.data_ppmco,
+            'timestamp': item.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+        })
 
-#     response = {
-#         "status": "success",
-#         "message": "Sensor data added successfully!",
-#         "data": data
-#     }
+    response = {
+        "status": "success",
+        "message": "Sensor data added successfully!",
+        "data": data
+    }
 
-#     return jsonify(response), 200
+    return jsonify(response), 200
 
 
 if __name__ == '__main__':
     # Launch the application
-    app.run(port=8000, debug=True)
+    app.run()
